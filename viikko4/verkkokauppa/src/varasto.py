@@ -26,7 +26,6 @@ class Varasto:
         saldo = self.saldo(tuote.id)
 
         self._saldot[tuote] = saldo - 1
-
         self._kirjanpito.lisaa_tapahtuma(f"otettiin varastosta {tuote}")
 
     def palauta_varastoon(self, tuote):
