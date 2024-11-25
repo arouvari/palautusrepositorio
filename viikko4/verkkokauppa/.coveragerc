@@ -1,0 +1,6 @@
+[coverage:run]
+omit =
+    src/tests/*
+    src/tests/*.py
+    src/tests/*_test.py
+    src/*_test.py

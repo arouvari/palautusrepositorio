@@ -19,14 +19,19 @@ class Varasto:
 
     def saldo(self, id):
         tuote = self.hae_tuote(id)
+        if tuote is None:
+            return None
 
         return self._saldot[tuote]
 
     def ota_varastosta(self, tuote):
         saldo = self.saldo(tuote.id)
+        if saldo and saldo > 0:
+            self._saldot[tuote] = saldo - 1
+            self._kirjanpito.lisaa_tapahtuma(f"otettiin varastosta {tuote}")
+        else:
+            self._kirjanpito.lisaa_tapahtuma(f"yritettiin ottaa varastosta {tuote}")
 
-        self._saldot[tuote] = saldo - 1
-        self._kirjanpito.lisaa_tapahtuma(f"otettiin varastosta {tuote}")
 
     def palauta_varastoon(self, tuote):
         saldo = self.saldo(tuote.id)
